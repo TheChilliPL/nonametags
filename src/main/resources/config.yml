@@ -1,0 +1,6 @@
+log_debug: no
+nonametags:
+  default: on
+  player: {}
+  seeall: {}
+  override: {}

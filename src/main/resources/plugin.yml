@@ -1,0 +1,27 @@
+name: NoNametags
+version: 1.0-SNAPSHOT
+main: me.patrykanuszczyk.nonametags.NoNametagsPlugin
+description: Removes player nametags
+author: TheChilliPL
+api-version: "1.13"
+commands:
+  nonametags:
+    description: Command for configuring NoNametags.
+    usage: |-
+      /nonametags [help]
+      /nonametags default <show/hide>
+      /nonametags player [username] <show/hide/default>
+      /nonametags seeall [username] <show/hide/default>
+      /nonametags override [observer] <target> <show/hide/default>
+    aliases:
+      - nnt
+    permission: nonametags.manage
+permissions: #TODO More advanced permissions
+  nonametags.*:
+    description: Wildcard for every other permission of this plugin.
+    default: false
+    children:
+      - nonametags.manage
+  nonametags.manage:
+    description: Allows to manage nametags.
+    default: op
