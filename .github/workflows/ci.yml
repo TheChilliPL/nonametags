@@ -18,7 +18,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Download CraftBukkit
-      run: mkdir libs && curl https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.14.4-R0.1-SNAPSHOT.jar -o ./libs/craftbukkit-1-14.4-R0.1-SNAPSHOT.jar
+      run: mkdir libs && curl https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.14.4-R0.1-SNAPSHOT.jar -o libs/craftbukkit-1.14.4-R0.1-SNAPSHOT.jar
 
     - name: Build
       run: ./gradlew jar
