@@ -100,7 +100,7 @@ abstract class NoNametagsNmsExecutor(plugin: NoNametagsPlugin)  :
 
     companion object {
         fun new(plugin: NoNametagsPlugin): NoNametagsNmsExecutor {
-            return NoNametagsNmsExecutorImpl(plugin)
+            return NoNametagsNmsReflectionExecutorImpl(plugin)
         }
     }
 }

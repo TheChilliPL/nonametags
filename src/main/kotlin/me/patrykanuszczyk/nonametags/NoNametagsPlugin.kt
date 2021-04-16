@@ -8,7 +8,7 @@ class NoNametagsPlugin : JavaPlugin() {
     override fun onEnable() {
         logger.info("Plugin enabled.")
 
-        executor = NoNametagsNmsExecutor.new(this)
+        executor = NoNametagsExecutor.new(this)
 
         server.pluginManager.registerEvents(executor, this)
 

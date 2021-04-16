@@ -1,5 +1,6 @@
 package me.patrykanuszczyk.nonametags
 
+import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -35,7 +36,7 @@ class NoNametagsCommand(val plugin: NoNametagsPlugin)
             false -> "&aSHOWN&r"
             true -> "&cHIDDEN&r"
             null -> "&bDEFAULT&r"
-        }
+        }.let { ChatColor.translateAlternateColorCodes('&', it) }
 
         when(args[0].toLowerCase()) {
             "default" -> {
@@ -66,6 +67,8 @@ class NoNametagsCommand(val plugin: NoNametagsPlugin)
                 plugin.executor.setPlayerNametagHidden(player, state)
 
                 sender.sendMessage("Player's nametag is now $stateText.")
+
+                return true
             }
 
             "seeall" -> {
@@ -85,6 +88,8 @@ class NoNametagsCommand(val plugin: NoNametagsPlugin)
                 sender.sendMessage(
                     "For the player, nametags are now $stateText."
                 )
+
+                return true
             }
 
             "override" -> {
@@ -107,6 +112,8 @@ class NoNametagsCommand(val plugin: NoNametagsPlugin)
                 sender.sendMessage(
                     "For the observer, target's nametag is now $stateText."
                 )
+
+                return true
             }
         }
 
@@ -129,10 +136,14 @@ class NoNametagsCommand(val plugin: NoNametagsPlugin)
         val showHideDefault = listOf("show", "hide", "default")
 
         when(args.size) {
-            in 0..1 -> return listOf("help")
+            in 0..1 -> return listOf(
+                "help", "default", "player", "seeall", "override"
+            )
             2 -> when(args[0].toLowerCase()) {
                 "default" -> return showHide
-                in setOf("player", "seeall", "override") ->
+                in setOf("player", "seeall") ->
+                    return showHideDefault + getOnlinePlayerNames()
+                "override" ->
                     return getOnlinePlayerNames()
             }
             3 -> when(args[0].toLowerCase()) {

@@ -1,6 +1,5 @@
 package me.patrykanuszczyk.nonametags
 
-import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 import java.io.Closeable
@@ -157,4 +156,10 @@ abstract class NoNametagsExecutor(val plugin: NoNametagsPlugin)
     abstract fun updateHidden(m1: NametagMatrix, m2: NametagMatrix)
 
     override fun close() {}
+
+    companion object {
+        fun new(plugin: NoNametagsPlugin): NoNametagsExecutor {
+            return NoNametagsNmsExecutor.new(plugin)
+        }
+    }
 }
