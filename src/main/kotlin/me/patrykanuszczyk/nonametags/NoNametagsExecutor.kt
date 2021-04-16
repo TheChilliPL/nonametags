@@ -135,30 +135,21 @@ abstract class NoNametagsExecutor(val plugin: NoNametagsPlugin)
     }
 
     fun getFromConfig() {
-        fun ConfigurationSection.getUuid(path: String)
-            = UUID.fromString(getString(path))
-        fun ConfigurationSection.getUuidList(path: String)
-            = getStringList(path).map { UUID.fromString(it)!! }
-        fun ConfigurationSection.getUuidMap(path: String) =
-            (get(path) as Map<*, *>).map {
-                UUID.fromString(it.key as String)!! to (it.value as Boolean)
-            }.toMap()
-
         _defaultHideNametags = config.getBoolean("default", true)
 
-        _playerNametagHidden = config.getUuidMap("player").toMutableMap()
+        _playerNametagHidden = config.getMutableMap("player") {
+            UUID.fromString(it) to getBoolean(it)
+        }!!
 
-        _playerDoesntSeeNametags = config.getUuidMap("seeall").toMutableMap()
+        _playerDoesntSeeNametags = config.getMutableMap("seeall") {
+            UUID.fromString(it) to getBoolean(it)
+        }!!
 
-        _nametagOverrides = (config.get("override") as Map<*, *>)
-            .map { a ->
-                UUID.fromString(a.key as String)!! to (a.value as Map<*, *>)
-                    .map { b ->
-                        UUID.fromString(b.key as String) to (b.value as Boolean)
-                    }
-                    .toMap().toMutableMap()
-            }
-            .toMap().toMutableMap()
+        _nametagOverrides = config.getMutableMap("overrides") { outer ->
+            UUID.fromString(outer) to getMutableMap(outer) { inner ->
+                UUID.fromString(inner) to getBoolean(inner)
+            }!!
+        }!!
 
         updateHidden(emptyMap(), getNametagMatrix())
     }
