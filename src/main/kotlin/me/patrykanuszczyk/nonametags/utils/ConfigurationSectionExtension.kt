@@ -1,4 +1,4 @@
-package me.patrykanuszczyk.nonametags
+package me.patrykanuszczyk.nonametags.utils
 
 import java.util.*
 import org.bukkit.configuration.ConfigurationSection as Section

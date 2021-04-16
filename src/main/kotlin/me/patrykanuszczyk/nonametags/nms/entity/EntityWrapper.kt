@@ -9,8 +9,6 @@ abstract class EntityWrapper {
         private val setInvisibleMethod by lazy { entityClass.getMethod("setInvisible", Boolean::class.javaPrimitiveType) }
         private val isInvulnerableMethod by lazy { entityClass.getMethod("isInvulnerable") }
         private val setInvulnerableMethod by lazy { entityClass.getMethod("setInvulnerable", Boolean::class.javaPrimitiveType) }
-        private val isMarkerMethod by lazy { entityClass.getMethod("isMarker") }
-        private val setMarkerMethod by lazy { entityClass.getMethod("setMarker", Boolean::class.javaPrimitiveType) }
         private val getCustomNameVisibleMethod by lazy { entityClass.getMethod("getCustomNameVisible") }
         private val setCustomNameVisibleMethod by lazy { entityClass.getMethod("setCustomNameVisible", Boolean::class.javaPrimitiveType) }
         private val getIdMethod by lazy { entityClass.getMethod("getId") }
@@ -21,23 +19,19 @@ abstract class EntityWrapper {
 
     var isInvisible
         get() = isInvisibleMethod(instance) as Boolean
-        set(value) = setInvisibleMethod(instance, value) as Unit
+        set(value) { setInvisibleMethod(instance, value) }
 
     var isInvulnerable
         get() = isInvulnerableMethod(instance) as Boolean
-        set(value) = setInvulnerableMethod(instance, value) as Unit
-
-    var isMarker
-        get() = isMarkerMethod(instance) as Boolean
-        set(value) = setMarkerMethod(instance, value) as Unit
+        set(value) { setInvulnerableMethod(instance, value) }
 
     var customNameVisible
         get() = getCustomNameVisibleMethod(instance) as Boolean
-        set(value) = setCustomNameVisibleMethod(instance, value) as Unit
+        set(value) { setCustomNameVisibleMethod(instance, value) }
 
     val id
         get() = getIdMethod(instance) as Int
 
-    val dataWatcher
+    val dataWatcher: Any
         get() = getDataWatcherMethod(instance)
 }

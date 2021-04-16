@@ -2,13 +2,13 @@ package me.patrykanuszczyk.nonametags.nms.packet
 
 import me.patrykanuszczyk.nonametags.nms.NMS
 
-class PacketPlayOutEntityDestroyWrapper(id: Int): PacketWrapper() {
+class PacketPlayOutEntityDestroyWrapper(vararg id: Int): PacketWrapper() {
     private companion object {
         private val packetPlayOutEntityDestroyClass by lazy { NMS.getClass("PacketPlayOutEntityDestroy") }
         private val packetPlayOutEntityDestroyConstructor by lazy {
-            packetPlayOutEntityDestroyClass.getConstructor(IntArray::class.javaPrimitiveType)
+            packetPlayOutEntityDestroyClass.getConstructor(IntArray::class.java)
         }
     }
 
-    override val packet by lazy { packetPlayOutEntityDestroyConstructor.newInstance(IntArray(id)) }
+    override val packet: Any by lazy { packetPlayOutEntityDestroyConstructor.newInstance(id) }
 }

@@ -13,6 +13,6 @@ class PlayerConnectionWrapper(private val handle: Any) {
     val networkManager by lazy { NetworkManagerWrapper(networkManagerField.get(handle)) }
 
     fun sendPacket(packetWrapper: PacketWrapper) {
-        sendPacketMethod.invoke(handle, packetWrapper.packet)
+        sendPacketMethod(handle, packetWrapper.packet)
     }
 }

@@ -14,7 +14,13 @@ class EntityArmorStandWrapper(world: WorldServerWrapper, x: Double, y: Double, z
                 Double::class.javaPrimitiveType,
                 Double::class.javaPrimitiveType)
         }
+        private val isMarkerMethod by lazy { entityArmorStandClass.getMethod("isMarker") }
+        private val setMarkerMethod by lazy { entityArmorStandClass.getMethod("setMarker", Boolean::class.javaPrimitiveType) }
     }
 
-    override val instance by lazy { entityArmorStandConstructor.newInstance(world.handle, x, y, z) }
+    override val instance: Any by lazy { entityArmorStandConstructor.newInstance(world.handle, x, y, z) }
+
+    var isMarker
+        get() = isMarkerMethod(instance) as Boolean
+        set(value) { setMarkerMethod(instance, value) }
 }

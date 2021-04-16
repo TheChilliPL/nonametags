@@ -42,8 +42,8 @@ class NoNametagsNmsReflectionExecutorImpl(plugin: NoNametagsPlugin) : NoNametags
 
                     plugin.logger.info(
                         spawnedPlayer.displayName
-                                + " spawning for "
-                                + player.displayName
+                            + " spawning for "
+                            + player.displayName
                     )
 
                     if(shouldNametagBeHidden(spawnedPlayer, player))

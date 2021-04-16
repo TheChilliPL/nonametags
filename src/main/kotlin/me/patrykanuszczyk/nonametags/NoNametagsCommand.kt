@@ -1,5 +1,6 @@
 package me.patrykanuszczyk.nonametags
 
+import me.patrykanuszczyk.nonametags.utils.color
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -36,7 +37,7 @@ class NoNametagsCommand(val plugin: NoNametagsPlugin)
             false -> "&aSHOWN&r"
             true -> "&cHIDDEN&r"
             null -> "&bDEFAULT&r"
-        }.let { ChatColor.translateAlternateColorCodes('&', it) }
+        }.color()
 
         when(args[0].toLowerCase()) {
             "default" -> {
@@ -115,6 +116,26 @@ class NoNametagsCommand(val plugin: NoNametagsPlugin)
 
                 return true
             }
+
+            "reload" -> {
+                sender.sendMessage(
+                    "Trying to reload config..."
+                )
+
+                plugin.reloadConfig()
+
+                plugin.executor.getFromConfig()
+
+                sender.sendMessage(
+                    """
+                        &a&lConfig reloaded successfully!
+                        &8(This command reloads only the nonametags object!)
+                        &4Warning! This command is experimental.
+                    """.trimIndent().color()
+                )
+
+                return true
+            }
         }
 
         return false
@@ -137,7 +158,7 @@ class NoNametagsCommand(val plugin: NoNametagsPlugin)
 
         when(args.size) {
             in 0..1 -> return listOf(
-                "help", "default", "player", "seeall", "override"
+                "help", "default", "player", "seeall", "override", "reload"
             )
             2 -> when(args[0].toLowerCase()) {
                 "default" -> return showHide

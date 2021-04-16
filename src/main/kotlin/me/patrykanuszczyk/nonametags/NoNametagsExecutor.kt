@@ -1,5 +1,6 @@
 package me.patrykanuszczyk.nonametags
 
+import me.patrykanuszczyk.nonametags.utils.getMutableMap
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 import java.io.Closeable
@@ -93,7 +94,7 @@ abstract class NoNametagsExecutor(val plugin: NoNametagsPlugin)
             else -> _nametagOverrides[observed]!![observer] = override
         }
 
-        config["override"] = _nametagOverrides.map { it ->
+        config["overrides"] = _nametagOverrides.map { it ->
             it.key.toString() to it.value.mapKeys { it.key.toString() }
         }.toMap()
         plugin.saveConfig()
@@ -122,6 +123,8 @@ abstract class NoNametagsExecutor(val plugin: NoNametagsPlugin)
         for(observer in plugin.server.onlinePlayers) {
             val set = mutableSetOf<Player>()
             for(observed in plugin.server.onlinePlayers) {
+                if(observed == observer) continue
+
                 val hidden = shouldNametagBeHidden(
                     observed.uniqueId,
                     observer.uniqueId
@@ -134,7 +137,9 @@ abstract class NoNametagsExecutor(val plugin: NoNametagsPlugin)
     }
 
     fun getFromConfig() {
-        _defaultHideNametags = config.getBoolean("default", true)
+        val m1 = getNametagMatrix()
+
+        _defaultHideNametags = config.getBoolean("default", false)
 
         _playerNametagHidden = config.getMutableMap("player") {
             UUID.fromString(it) to getBoolean(it)
@@ -150,7 +155,9 @@ abstract class NoNametagsExecutor(val plugin: NoNametagsPlugin)
             }!!
         }!!
 
-        updateHidden(emptyMap(), getNametagMatrix())
+        val m2 = getNametagMatrix()
+
+        updateHidden(m1, m2)
     }
 
     abstract fun updateHidden(m1: NametagMatrix, m2: NametagMatrix)
