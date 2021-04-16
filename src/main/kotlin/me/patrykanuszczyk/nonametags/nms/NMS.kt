@@ -8,7 +8,7 @@ object NMS {
     }
 
     private val version: String by lazy {
-        Bukkit.getServer().javaClass.packageName.split(".")[3]
+        Bukkit.getServer().javaClass.`package`.name.split(".")[3]
     }
 
     fun getClass(className: String): Class<*> {
