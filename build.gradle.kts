@@ -20,8 +20,6 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-
     compileOnly("org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT")
     compileOnly("", "craftbukkit-1.14.4-R0.1-SNAPSHOT")
 }
@@ -37,4 +35,5 @@ tasks.withType<ShadowJar> {
     if(project.version.toString().endsWith("-SNAPSHOT")) {
         archiveVersion.set("")
     }
+    minimize()
 }

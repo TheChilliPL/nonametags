@@ -17,9 +17,7 @@ class NoNametagsPlugin : JavaPlugin() {
         NoNametagsCommand(this).also {
             getCommand("nonametags")?.apply {
                 setExecutor(it)
-            }/* ?: throw NullPointerException(
-                "Didn't find the /nonametags command."
-            ) shouldn't happen with the current plugin.yml*/
+            }
         }
 
         executor.getFromConfig()

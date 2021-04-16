@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: Build plugin
     runs-on: ubuntu-latest
 
     steps:
@@ -22,14 +23,32 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Cache CraftBukkit
+        id: craftbukkit-cache
+        uses: actions/cache@v2
+        with:
+          path: libs/craftbukkit-1.14.4-R0.1-SNAPSHOT.jar
+          key: ${{ runner.os }}-craftbukkit-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
       - name: Download CraftBukkit
+        if: steps.craftbukkit-cache.outputs.cache-hit != 'true'
         run: mkdir libs && curl https://cdn.getbukkit.org/craftbukkit/craftbukkit-1.14.4-R0.1-SNAPSHOT.jar -o libs/craftbukkit-1.14.4-R0.1-SNAPSHOT.jar
 
+      - name: Cache Gradle
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
       - name: Build
-        run: ./gradlew jar
+        run: ./gradlew shadowJar
+        env:
+          BUILD_SCAN: yes
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2.0.1
         with:
           name: nonametags
-          path: ${{github.workspace}}/build/libs
+          path: ${{github.workspace}}/build/libs/*.jar
