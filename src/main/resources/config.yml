@@ -3,4 +3,4 @@ nonametags:
   default: on
   player: {}
   seeall: {}
-  override: {}
+  overrides: {}
