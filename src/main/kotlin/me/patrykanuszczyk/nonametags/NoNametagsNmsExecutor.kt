@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import java.io.Closeable
 
-abstract class NoNametagsNmsExecutor(plugin: NoNametagsPlugin)  :
+abstract class NoNametagsNmsExecutor<PacketType>(plugin: NoNametagsPlugin)  :
     NoNametagsExecutor(plugin), Closeable
 {
     private val injectedPlayers = mutableSetOf<Player>()
@@ -91,15 +91,15 @@ abstract class NoNametagsNmsExecutor(plugin: NoNametagsPlugin)  :
     }
 
     protected abstract fun createHidingPackets(player: Player)
-        : List<Any>
+        : List<PacketType>
 
     protected abstract fun createShowingPackets(player: Player)
-        : List<Any>
+        : List<PacketType>
 
-    protected abstract fun sendPackets(packets: List<Any>, player: Player)
+    protected abstract fun sendPackets(packets: List<PacketType>, player: Player)
 
     companion object {
-        fun new(plugin: NoNametagsPlugin): NoNametagsNmsExecutor {
+        fun new(plugin: NoNametagsPlugin): NoNametagsNmsExecutor<*> {
             return NoNametagsNmsReflectionExecutorImpl(plugin)
         }
     }

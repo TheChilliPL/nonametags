@@ -10,7 +10,7 @@ import org.bukkit.entity.Player
 import java.util.*
 
 class NoNametagsNmsExecutorImpl(plugin: NoNametagsPlugin)
-    : NoNametagsNmsExecutor(plugin)
+    : NoNametagsNmsExecutor<Packet<PacketListenerPlayOut>>(plugin)
 {
     private val stands = mutableMapOf<Player, EntityArmorStand>()
 
@@ -69,7 +69,7 @@ class NoNametagsNmsExecutorImpl(plugin: NoNametagsPlugin)
         }
     }
 
-    override fun createHidingPackets(player: Player): List<Any> {
+    override fun createHidingPackets(player: Player): List<Packet<PacketListenerPlayOut>> {
         val armorStand = getArmorStand(player)
 
         val spawnPacket = PacketPlayOutSpawnEntityLiving(armorStand)
@@ -91,7 +91,7 @@ class NoNametagsNmsExecutorImpl(plugin: NoNametagsPlugin)
         return listOf(spawnPacket, metadataPacket, mountPacket)
     }
 
-    override fun createShowingPackets(player: Player): List<Any> {
+    override fun createShowingPackets(player: Player): List<Packet<PacketListenerPlayOut>> {
         val armorStand = getArmorStand(player)
 
         val destroyPacket = PacketPlayOutEntityDestroy(armorStand.id)
@@ -99,9 +99,9 @@ class NoNametagsNmsExecutorImpl(plugin: NoNametagsPlugin)
         return listOf(destroyPacket)
     }
 
-    override fun sendPackets(packets: List<Any>, player: Player) {
+    override fun sendPackets(packets: List<Packet<PacketListenerPlayOut>>, player: Player) {
         val conn = (player as CraftPlayer).handle.playerConnection
 
-        packets.forEach { conn.sendPacket(it as Packet<*>) }
+        packets.forEach { conn.sendPacket(it) }
     }
 }

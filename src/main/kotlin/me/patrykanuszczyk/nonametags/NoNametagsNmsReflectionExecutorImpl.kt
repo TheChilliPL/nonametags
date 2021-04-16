@@ -10,7 +10,9 @@ import me.patrykanuszczyk.nonametags.obc.CraftWorldWrapper
 import org.bukkit.entity.Player
 import java.util.*
 
-class NoNametagsNmsReflectionExecutorImpl(plugin: NoNametagsPlugin) : NoNametagsNmsExecutor(plugin) {
+class NoNametagsNmsReflectionExecutorImpl(plugin: NoNametagsPlugin)
+    : NoNametagsNmsExecutor<PacketWrapper>(plugin)
+{
     private val stands = mutableMapOf<Player, EntityArmorStandWrapper>()
 
     private fun getArmorStand(player: Player): EntityArmorStandWrapper {
@@ -67,7 +69,7 @@ class NoNametagsNmsReflectionExecutorImpl(plugin: NoNametagsPlugin) : NoNametags
         }
     }
 
-    override fun createHidingPackets(player: Player): List<Any> {
+    override fun createHidingPackets(player: Player): List<PacketWrapper> {
         val armorStand = getArmorStand(player)
         val spawnPacket = PacketPlayOutSpawnEntityLivingWrapper(armorStand)
         val metadataPacket = PacketPlayOutEntityMetadataWrapper(armorStand.id, armorStand.dataWatcher, true)
@@ -81,16 +83,16 @@ class NoNametagsNmsReflectionExecutorImpl(plugin: NoNametagsPlugin) : NoNametags
         return listOf(spawnPacket, metadataPacket, mountPacket)
     }
 
-    override fun createShowingPackets(player: Player): List<Any> {
+    override fun createShowingPackets(player: Player): List<PacketWrapper> {
         val armorStand = getArmorStand(player)
         val destroyPacket = PacketPlayOutEntityDestroyWrapper(armorStand.id)
 
         return listOf(destroyPacket)
     }
 
-    override fun sendPackets(packets: List<Any>, player: Player) {
+    override fun sendPackets(packets: List<PacketWrapper>, player: Player) {
         val connection = CraftPlayerWrapper(player).handle.playerConnection
 
-        packets.forEach { connection.sendPacket(it as PacketWrapper) }
+        packets.forEach { connection.sendPacket(it) }
     }
 }
