@@ -6,7 +6,7 @@ class PacketPlayOutEntityDestroyWrapper(id: Int): PacketWrapper() {
     private companion object {
         private val packetPlayOutEntityDestroyClass by lazy { NMS.getClass("PacketPlayOutEntityDestroy") }
         private val packetPlayOutEntityDestroyConstructor by lazy {
-            packetPlayOutEntityDestroyClass.getConstructor(IntArray::class.java)
+            packetPlayOutEntityDestroyClass.getConstructor(IntArray::class.javaPrimitiveType)
         }
     }
 

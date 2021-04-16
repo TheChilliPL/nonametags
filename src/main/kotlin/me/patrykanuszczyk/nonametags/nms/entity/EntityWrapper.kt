@@ -6,13 +6,13 @@ abstract class EntityWrapper {
     internal companion object {
         internal val entityClass by lazy { NMS.getClass("Entity") }
         private val isInvisibleMethod by lazy { entityClass.getMethod("isInvisible") }
-        private val setInvisibleMethod by lazy { entityClass.getMethod("setInvisible") }
+        private val setInvisibleMethod by lazy { entityClass.getMethod("setInvisible", Boolean::class.javaPrimitiveType) }
         private val isInvulnerableMethod by lazy { entityClass.getMethod("isInvulnerable") }
-        private val setInvulnerableMethod by lazy { entityClass.getMethod("setInvulnerable") }
+        private val setInvulnerableMethod by lazy { entityClass.getMethod("setInvulnerable", Boolean::class.javaPrimitiveType) }
         private val isMarkerMethod by lazy { entityClass.getMethod("isMarker") }
-        private val setMarkerMethod by lazy { entityClass.getMethod("setMarker") }
+        private val setMarkerMethod by lazy { entityClass.getMethod("setMarker", Boolean::class.javaPrimitiveType) }
         private val getCustomNameVisibleMethod by lazy { entityClass.getMethod("getCustomNameVisible") }
-        private val setCustomNameVisibleMethod by lazy { entityClass.getMethod("setCustomNameVisible") }
+        private val setCustomNameVisibleMethod by lazy { entityClass.getMethod("setCustomNameVisible", Boolean::class.javaPrimitiveType) }
         private val getIdMethod by lazy { entityClass.getMethod("getId") }
         private val getDataWatcherMethod by lazy { entityClass.getMethod("getDataWatcher") }
     }

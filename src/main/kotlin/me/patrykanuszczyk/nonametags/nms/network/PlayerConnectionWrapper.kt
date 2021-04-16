@@ -7,7 +7,7 @@ class PlayerConnectionWrapper(private val handle: Any) {
     private companion object {
         private val playerConnectionClass by lazy { NMS.getClass("PlayerConnection") }
         private val networkManagerField by lazy { playerConnectionClass.getField("networkManager") }
-        private val sendPacketMethod by lazy { playerConnectionClass.getMethod("sendPacket") }
+        private val sendPacketMethod by lazy { playerConnectionClass.getMethod("sendPacket", PacketWrapper.packetClass) }
     }
 
     val networkManager by lazy { NetworkManagerWrapper(networkManagerField.get(handle)) }

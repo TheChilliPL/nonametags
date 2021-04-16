@@ -7,7 +7,7 @@ class PacketPlayOutEntityMetadataWrapper(id: Int, dataWatcher: Any, var1: Boolea
         private val packetPlayOutEntityMetadataClass by lazy { NMS.getClass("PacketPlayOutEntityMetadata") }
         private val dataWatcherClass by lazy { NMS.getClass("DataWatcher") }
         private val packetPlayOutEntityMetadataConstructor by lazy {
-            packetPlayOutEntityMetadataClass.getConstructor(Int::class.java, dataWatcherClass, Boolean::class.java)
+            packetPlayOutEntityMetadataClass.getConstructor(Int::class.javaPrimitiveType, dataWatcherClass, Boolean::class.javaPrimitiveType)
         }
     }
 
