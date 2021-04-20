@@ -2,7 +2,7 @@ package me.patrykanuszczyk.nonametags.obc
 
 import org.bukkit.Bukkit
 
-object OBC {
+internal object OBC {
     private val packageName: String by lazy {
         "org.bukkit.craftbukkit.$version"
     }

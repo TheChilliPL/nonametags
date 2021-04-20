@@ -2,7 +2,7 @@ package me.patrykanuszczyk.nonametags.nms.entity
 
 import me.patrykanuszczyk.nonametags.nms.NMS
 
-abstract class EntityWrapper {
+internal abstract class EntityWrapper {
     internal companion object {
         internal val entityClass by lazy { NMS.getClass("Entity") }
         private val isInvisibleMethod by lazy { entityClass.getMethod("isInvisible") }

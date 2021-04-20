@@ -9,7 +9,7 @@ import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer
 import org.bukkit.entity.Player
 import java.util.*
 
-class NoNametagsNmsExecutorImpl(plugin: NoNametagsPlugin)
+internal class NoNametagsNmsExecutorImpl(plugin: NoNametagsPlugin)
     : NoNametagsNmsExecutor<Packet<PacketListenerPlayOut>>(plugin)
 {
     private val stands = mutableMapOf<Player, EntityArmorStand>()

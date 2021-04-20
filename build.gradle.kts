@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.4.32"
     id("com.github.johnrengelman.shadow") version "5.2.0"
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.5.0"
 }
 
 group = "me.patrykanuszczyk"

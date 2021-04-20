@@ -2,7 +2,7 @@ package me.patrykanuszczyk.nonametags.nms
 
 import org.bukkit.Bukkit
 
-object NMS {
+internal object NMS {
     private val packageName: String by lazy {
         "net.minecraft.server.$version"
     }

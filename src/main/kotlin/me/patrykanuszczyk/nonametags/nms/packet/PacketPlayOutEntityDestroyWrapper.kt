@@ -2,7 +2,7 @@ package me.patrykanuszczyk.nonametags.nms.packet
 
 import me.patrykanuszczyk.nonametags.nms.NMS
 
-class PacketPlayOutEntityDestroyWrapper(vararg id: Int): PacketWrapper() {
+internal class PacketPlayOutEntityDestroyWrapper(vararg id: Int): PacketWrapper() {
     private companion object {
         private val packetPlayOutEntityDestroyClass by lazy { NMS.getClass("PacketPlayOutEntityDestroy") }
         private val packetPlayOutEntityDestroyConstructor by lazy {

@@ -12,5 +12,5 @@ import org.bukkit.ChatColor
  * @see ChatColor.translateAlternateColorCodes
  *
  */
-fun String.color() =
+internal fun String.color() =
     ChatColor.translateAlternateColorCodes('&', this)

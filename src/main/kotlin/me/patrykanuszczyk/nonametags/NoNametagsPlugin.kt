@@ -6,6 +6,8 @@ class NoNametagsPlugin : JavaPlugin() {
     lateinit var executor: NoNametagsExecutor
 
     override fun onEnable() {
+        instance = this
+
         logger.info("Plugin enabled.")
 
         executor = NoNametagsExecutor.new(this)
@@ -25,5 +27,10 @@ class NoNametagsPlugin : JavaPlugin() {
 
     override fun onDisable() {
         executor.close()
+    }
+
+    companion object {
+        var instance: NoNametagsPlugin? = null
+            internal set
     }
 }

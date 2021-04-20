@@ -1,14 +1,13 @@
 package me.patrykanuszczyk.nonametags
 
 import me.patrykanuszczyk.nonametags.utils.color
-import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
 
-class NoNametagsCommand(val plugin: NoNametagsPlugin)
+internal class NoNametagsCommand(private val plugin: NoNametagsPlugin)
     : CommandExecutor, TabCompleter
 {
     private infix fun String.equalsIgnoreCase(other: String)

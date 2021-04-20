@@ -1,0 +1,65 @@
+public abstract class me/patrykanuszczyk/nonametags/NoNametagsExecutor : java/io/Closeable, org/bukkit/event/Listener {
+	public static final field Companion Lme/patrykanuszczyk/nonametags/NoNametagsExecutor$Companion;
+	public fun <init> (Lme/patrykanuszczyk/nonametags/NoNametagsPlugin;)V
+	public fun close ()V
+	public final fun getFromConfig ()V
+	public final fun getHideNametagsByDefault ()Z
+	public final fun getNametagMatrix ()Ljava/util/Map;
+	public final fun getNametagOverride (Ljava/util/UUID;Ljava/util/UUID;)Ljava/lang/Boolean;
+	public final fun getNametagOverride (Lorg/bukkit/entity/Player;Lorg/bukkit/entity/Player;)Ljava/lang/Boolean;
+	public final fun getPlayerDoesntSeeNametags (Ljava/util/UUID;)Ljava/lang/Boolean;
+	public final fun getPlayerDoesntSeeNametags (Lorg/bukkit/entity/Player;)Ljava/lang/Boolean;
+	public final fun getPlayerNametagHidden (Ljava/util/UUID;)Ljava/lang/Boolean;
+	public final fun getPlayerNametagHidden (Lorg/bukkit/entity/Player;)Ljava/lang/Boolean;
+	public final fun getPlugin ()Lme/patrykanuszczyk/nonametags/NoNametagsPlugin;
+	public final fun setHideNametagsByDefault (Z)V
+	public final fun setNametagOverride (Ljava/util/UUID;Ljava/util/UUID;Ljava/lang/Boolean;)V
+	public final fun setNametagOverride (Lorg/bukkit/entity/Player;Lorg/bukkit/entity/Player;Ljava/lang/Boolean;)V
+	public final fun setPlayerDoesntSeeNametags (Ljava/util/UUID;Ljava/lang/Boolean;)V
+	public final fun setPlayerDoesntSeeNametags (Lorg/bukkit/entity/Player;Ljava/lang/Boolean;)V
+	public final fun setPlayerNametagHidden (Ljava/util/UUID;Ljava/lang/Boolean;)V
+	public final fun setPlayerNametagHidden (Lorg/bukkit/entity/Player;Ljava/lang/Boolean;)V
+	public final fun shouldNametagBeHidden (Ljava/util/UUID;Ljava/util/UUID;)Z
+	public final fun shouldNametagBeHidden (Lorg/bukkit/entity/Player;Lorg/bukkit/entity/Player;)Z
+	public abstract fun updateHidden (Ljava/util/Map;Ljava/util/Map;)V
+}
+
+public final class me/patrykanuszczyk/nonametags/NoNametagsExecutor$Companion {
+	public final fun new (Lme/patrykanuszczyk/nonametags/NoNametagsPlugin;)Lme/patrykanuszczyk/nonametags/NoNametagsExecutor;
+}
+
+public abstract class me/patrykanuszczyk/nonametags/NoNametagsNmsExecutor : me/patrykanuszczyk/nonametags/NoNametagsExecutor, java/io/Closeable {
+	public static final field Companion Lme/patrykanuszczyk/nonametags/NoNametagsNmsExecutor$Companion;
+	public final fun addNametag (Lorg/bukkit/entity/Player;)V
+	public final fun addNametag (Lorg/bukkit/entity/Player;Lorg/bukkit/entity/Player;)V
+	public fun close ()V
+	protected abstract fun createHidingPackets (Lorg/bukkit/entity/Player;)Ljava/util/List;
+	protected abstract fun createShowingPackets (Lorg/bukkit/entity/Player;)Ljava/util/List;
+	public abstract fun injectPlayer (Lorg/bukkit/entity/Player;)V
+	public final fun onPlayerJoin (Lorg/bukkit/event/player/PlayerJoinEvent;)V
+	public final fun onPlayerQuit (Lorg/bukkit/event/player/PlayerQuitEvent;)V
+	public final fun removeNametag (Lorg/bukkit/entity/Player;)V
+	public final fun removeNametag (Lorg/bukkit/entity/Player;Lorg/bukkit/entity/Player;)V
+	public abstract fun removePlayer (Lorg/bukkit/entity/Player;)V
+	protected abstract fun sendPackets (Ljava/util/List;Lorg/bukkit/entity/Player;)V
+	public fun updateHidden (Ljava/util/Map;Ljava/util/Map;)V
+}
+
+public final class me/patrykanuszczyk/nonametags/NoNametagsNmsExecutor$Companion {
+	public final fun new (Lme/patrykanuszczyk/nonametags/NoNametagsPlugin;)Lme/patrykanuszczyk/nonametags/NoNametagsNmsExecutor;
+}
+
+public final class me/patrykanuszczyk/nonametags/NoNametagsPlugin : org/bukkit/plugin/java/JavaPlugin {
+	public static final field Companion Lme/patrykanuszczyk/nonametags/NoNametagsPlugin$Companion;
+	public field executor Lme/patrykanuszczyk/nonametags/NoNametagsExecutor;
+	public fun <init> ()V
+	public final fun getExecutor ()Lme/patrykanuszczyk/nonametags/NoNametagsExecutor;
+	public fun onDisable ()V
+	public fun onEnable ()V
+	public final fun setExecutor (Lme/patrykanuszczyk/nonametags/NoNametagsExecutor;)V
+}
+
+public final class me/patrykanuszczyk/nonametags/NoNametagsPlugin$Companion {
+	public final fun getInstance ()Lme/patrykanuszczyk/nonametags/NoNametagsPlugin;
+}
+

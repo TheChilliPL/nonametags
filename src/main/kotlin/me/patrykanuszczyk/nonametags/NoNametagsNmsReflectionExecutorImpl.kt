@@ -10,7 +10,7 @@ import me.patrykanuszczyk.nonametags.obc.CraftWorldWrapper
 import org.bukkit.entity.Player
 import java.util.*
 
-class NoNametagsNmsReflectionExecutorImpl(plugin: NoNametagsPlugin)
+internal class NoNametagsNmsReflectionExecutorImpl(plugin: NoNametagsPlugin)
     : NoNametagsNmsExecutor<PacketWrapper>(plugin)
 {
     private val stands = mutableMapOf<Player, EntityArmorStandWrapper>()

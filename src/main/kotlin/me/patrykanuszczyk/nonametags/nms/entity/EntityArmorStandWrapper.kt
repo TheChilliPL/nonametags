@@ -4,7 +4,9 @@ import me.patrykanuszczyk.nonametags.nms.NMS
 import me.patrykanuszczyk.nonametags.nms.world.WorldServerWrapper
 import me.patrykanuszczyk.nonametags.nms.world.WorldWrapper
 
-class EntityArmorStandWrapper(world: WorldServerWrapper, x: Double, y: Double, z: Double): EntityLivingWrapper() {
+internal class EntityArmorStandWrapper(world: WorldServerWrapper, x: Double, y: Double, z: Double)
+    : EntityLivingWrapper()
+{
     private companion object {
         private val entityArmorStandClass by lazy { NMS.getClass("EntityArmorStand") }
         private val entityArmorStandConstructor by lazy {

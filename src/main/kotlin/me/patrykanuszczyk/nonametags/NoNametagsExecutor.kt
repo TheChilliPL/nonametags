@@ -118,7 +118,7 @@ abstract class NoNametagsExecutor(val plugin: NoNametagsPlugin)
     fun shouldNametagBeHidden(observed: Player, observer: Player)
         = shouldNametagBeHidden(observed.uniqueId, observer.uniqueId)
 
-    private fun getNametagMatrix(): NametagMatrix {
+    fun getNametagMatrix(): NametagMatrix {
         val matrix = mutableMapOf<Player, Set<Player>>()
         for(observer in plugin.server.onlinePlayers) {
             val set = mutableSetOf<Player>()

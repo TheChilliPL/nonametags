@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import java.io.Closeable
 
-abstract class NoNametagsNmsExecutor<PacketType>(plugin: NoNametagsPlugin)  :
+abstract class NoNametagsNmsExecutor<PacketType> internal constructor(plugin: NoNametagsPlugin)  :
     NoNametagsExecutor(plugin), Closeable
 {
     private val injectedPlayers = mutableSetOf<Player>()
